@@ -24,6 +24,6 @@ public class MemberController {
     public String register(@ModelAttribute MemberDTO memberDTO) {
         System.out.println("memberDTO = " + memberDTO);
         memberService.register(memberDTO);
-        return "index";
+        return "login";
     }
 }
