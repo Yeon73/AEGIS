@@ -6,6 +6,7 @@ import com.seoultech.tools.aegis.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Member;
 import java.util.Optional;
 
 @Service
@@ -41,6 +42,17 @@ public class MemberService {
         } else {
             // 조회 결과가 없다(해당 이메일을 가진 회원이 없다)
             return null;
+        }
+    }
+
+    public String emailCheck(String memberEmail) {
+        Optional<MemberEntity> byMemberEmail = memberRepository.findByMemberEmail(memberEmail);
+        if (byMemberEmail.isPresent()) {
+            // 조회결과가 있다 -> 사용할 수 없다.
+            return null;
+        } else {
+            // 조회결과가 없다 -> 사용할 수 있다.
+            return "ok";
         }
     }
 }

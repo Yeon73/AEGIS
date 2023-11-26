@@ -4,9 +4,9 @@ import com.seoultech.tools.aegis.dto.MemberDTO;
 import com.seoultech.tools.aegis.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.JspAwareRequestContext;
+
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -49,5 +49,18 @@ public class MemberController {
     public String logout(HttpSession session) {
         session.invalidate();
         return "index";
+    }
+
+    @PostMapping("/member/email-check")
+    public @ResponseBody String emailCheck(@RequestParam("memberEmail") String memberEmail) {
+        System.out.println("memberEmail = " + memberEmail);
+        String checkResult = memberService.emailCheck(memberEmail);
+        return checkResult;
+        /* if(checkResult != null) {
+            return "ok";
+        } else {
+            return "no";
+        }
+        return "체크완료"; */
     }
 }
