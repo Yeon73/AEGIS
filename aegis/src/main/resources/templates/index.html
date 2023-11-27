@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>index</title>
 </head>
 <body>
     <h2>-- AEGIS Main Page --</h2>
-    <a href="/member/save">회원가입</a>
+
+
+    <a>문의</a>
     <a href="/member/login">로그인</a>
+    <form th:action="@{/member/start-game}" method="post">
+        <button type="submit">Game Start</button>
+    </form>
 </body>
 </html>

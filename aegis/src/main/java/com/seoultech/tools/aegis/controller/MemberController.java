@@ -15,6 +15,11 @@ public class MemberController {
     // 생성자 주입
     private final MemberService memberService;
 
+    @GetMapping("/member/game")
+    public String game() {
+        return "game";
+    }
+
     // 회원가입 페이지 출력 요청
     @GetMapping("/member/save")
     public String saveForm() {
@@ -56,11 +61,33 @@ public class MemberController {
         System.out.println("memberEmail = " + memberEmail);
         String checkResult = memberService.emailCheck(memberEmail);
         return checkResult;
-        /* if(checkResult != null) {
-            return "ok";
+    }
+
+    @GetMapping("/member/progress")
+    public String progressForm() {
+        return "progress";
+    }
+
+    @GetMapping("/member/achievement")
+    public String achievementForm() {
+        return "achievement";
+    }
+
+    @GetMapping("/member/profile")
+    public String profileForm() {
+        return "profile";
+    }
+
+    @PostMapping("/member/start-game")
+    public String startGame(HttpSession session) {
+        Boolean isLoggedIn = (Boolean) session.getAttribute("loginEmail");
+
+        if (isLoggedIn != null && isLoggedIn) {
+            // 로그인 상태이면 game 페이지로 이동
+            return "redirect:/member/game";
         } else {
-            return "no";
+            // 비로그인 상태이면 login 페이지로 리다이렉트
+            return "redirect:/member/login";
         }
-        return "체크완료"; */
     }
 }
