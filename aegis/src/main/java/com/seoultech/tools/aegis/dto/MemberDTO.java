@@ -3,8 +3,6 @@ package com.seoultech.tools.aegis.dto;
 import com.seoultech.tools.aegis.entity.MemberEntity;
 import lombok.*;
 
-import java.lang.reflect.Member;
-
 @Getter
 @Setter
 @NoArgsConstructor

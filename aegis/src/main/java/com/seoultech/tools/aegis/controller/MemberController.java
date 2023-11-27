@@ -5,8 +5,6 @@ import com.seoultech.tools.aegis.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.JspAwareRequestContext;
-
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -43,6 +41,7 @@ public class MemberController {
         if (loginResult != null) {
             // login 성공
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
+            session.setAttribute("isLogin", true);
             return "main";
         } else {
             // login 실패
@@ -80,7 +79,7 @@ public class MemberController {
 
     @PostMapping("/member/start-game")
     public String startGame(HttpSession session) {
-        Boolean isLoggedIn = (Boolean) session.getAttribute("loginEmail");
+        Boolean isLoggedIn = (Boolean) session.getAttribute("isLogin");
 
         if (isLoggedIn != null && isLoggedIn) {
             // 로그인 상태이면 game 페이지로 이동
