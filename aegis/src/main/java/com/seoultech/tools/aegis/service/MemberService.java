@@ -5,8 +5,6 @@ import com.seoultech.tools.aegis.entity.MemberEntity;
 import com.seoultech.tools.aegis.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.lang.reflect.Member;
 import java.util.Optional;
 
 @Service
