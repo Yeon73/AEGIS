@@ -49,7 +49,7 @@ public class MemberController {
         if (loginResult != null) {
             // login 성공
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
-            session.setAttribute("isLogin", true);
+            session.setAttribute("inLog", true);
             return "main";
         } else {
             // login 실패
@@ -87,7 +87,7 @@ public class MemberController {
 
     @PostMapping("/isLogin")
     public ResponseEntity<Boolean> checkLoginStatus(HttpSession session) {
-        Boolean isLoggedIn = (Boolean) session.getAttribute("isLogin");
+        Boolean isLoggedIn = (Boolean) session.getAttribute("inLog");
 
         if (isLoggedIn != null && isLoggedIn) {
             // 로그인 상태이면 true 반환
@@ -97,6 +97,5 @@ public class MemberController {
             return ResponseEntity.ok(false);
         }
     }
-
 }
 
