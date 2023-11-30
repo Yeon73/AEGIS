@@ -2,10 +2,8 @@ package com.seoultech.tools.aegis.controller;
 
 import com.seoultech.tools.aegis.dto.MemberDTO;
 import com.seoultech.tools.aegis.service.MemberService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
@@ -84,18 +82,8 @@ public class MemberController {
     public String profileForm() {
         return "profile";
     }
-}
 
-@RestController
-@RequestMapping("/member")
-public class MemberController {
-
-    private final MemberService memberService;
-
-    // 생성자 주입
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
+    @ResponseBody
     @PostMapping("/isLogin")
     public ResponseEntity<Boolean> checkLoginStatus(HttpSession session) {
         Boolean isLoggedIn = (Boolean) session.getAttribute("inLog");
