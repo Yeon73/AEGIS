@@ -2,6 +2,7 @@ package com.seoultech.tools.aegis.controller;
 
 import com.seoultech.tools.aegis.service.MemberService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +19,7 @@ public class LoginController {
         this.memberService = memberService;
     }
 
-    @PostMapping("/isLogin")
+    @GetMapping("/isLogin")
     public ResponseEntity<Boolean> checkLoginStatus(HttpSession session) {
         Boolean isLoggedIn = (Boolean) session.getAttribute("inLog");
 
