@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
-@RestController
+@Controller
 @RequestMapping("/member")
 public class MemberController {
 
@@ -84,7 +84,18 @@ public class MemberController {
     public String profileForm() {
         return "profile";
     }
+}
 
+@RestController
+@RequestMapping("/member")
+public class MemberController {
+
+    private final MemberService memberService;
+
+    // 생성자 주입
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
     @PostMapping("/isLogin")
     public ResponseEntity<Boolean> checkLoginStatus(HttpSession session) {
         Boolean isLoggedIn = (Boolean) session.getAttribute("inLog");
