@@ -82,19 +82,5 @@ public class MemberController {
     public String profileForm() {
         return "profile";
     }
-
-    @ResponseBody
-    @PostMapping("/isLogin")
-    public ResponseEntity<Boolean> checkLoginStatus(HttpSession session) {
-        Boolean isLoggedIn = (Boolean) session.getAttribute("inLog");
-
-        if (isLoggedIn != null && isLoggedIn) {
-            // 로그인 상태이면 true 반환
-            return ResponseEntity.ok(true);
-        } else {
-            // 비로그인 상태이면 false 반환
-            return ResponseEntity.ok(false);
-        }
-    }
 }
 
