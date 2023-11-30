@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping(value = "/member", method = {RequestMethod.GET, RequestMethod.POST})
 public class MemberController {
 
     private final MemberService memberService;

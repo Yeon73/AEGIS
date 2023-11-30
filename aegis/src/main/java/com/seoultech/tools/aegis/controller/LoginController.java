@@ -2,15 +2,12 @@ package com.seoultech.tools.aegis.controller;
 
 import com.seoultech.tools.aegis.service.MemberService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/member")
+@RequestMapping(value = "/member", method = {RequestMethod.GET, RequestMethod.POST})
 public class LoginController {
     private final MemberService memberService;
 
