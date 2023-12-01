@@ -84,6 +84,7 @@ public class MemberController {
     }
 
     @GetMapping("/isLogin")
+    @ResponseBody
     public ResponseEntity<Boolean> checkLoginStatus(HttpSession session) {
         Boolean isLoggedIn = (Boolean) session.getAttribute("inLog");
 
