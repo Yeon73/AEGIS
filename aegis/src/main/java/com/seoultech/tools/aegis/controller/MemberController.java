@@ -32,6 +32,7 @@ public class MemberController {
     }
 
     @PostMapping("/save")
+    @ResponseBody
     public ResponseEntity<Boolean> save(@ModelAttribute @Valid MemberDTO memberDTO, Errors errors) {
         if (errors.hasErrors()) {
             return ResponseEntity.ok(false);
@@ -43,12 +44,14 @@ public class MemberController {
         }
     }
 
+
     @GetMapping("/login")
     public String loginForm() {
         return "login";
     }
 
     @PostMapping("/login")
+    @ResponseBody
     public ResponseEntity<Boolean> login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
         MemberDTO loginResult = memberService.login(memberDTO);
         if (loginResult != null) {
@@ -62,6 +65,10 @@ public class MemberController {
         }
     }
 
+    @GetMapping("/main")
+    public String mainForm() {
+        return "main";
+    }
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
