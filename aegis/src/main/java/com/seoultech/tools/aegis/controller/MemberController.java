@@ -20,12 +20,10 @@ import java.io.OutputStream;
 public class MemberController {
 
     private final MemberService memberService;
-    private final HttpSession session;
 
     // 생성자 주입
-    public MemberController(MemberService memberService, HttpSession session) {
+    public MemberController(MemberService memberService) {
         this.memberService = memberService;
-        this.session = session;
     }
 
 
@@ -77,7 +75,8 @@ public class MemberController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity<Boolean> login(@ModelAttribute MemberDTO memberDTO) {
+    public ResponseEntity<Boolean> login(@ModelAttribute MemberDTO memberDTO, HttpServletRequest request) {
+        HttpSession session = request.getSession();
         MemberDTO loginResult = memberService.login(memberDTO);
         if (loginResult != null) {
             // login 성공
@@ -124,9 +123,9 @@ public class MemberController {
 
     @GetMapping("/isLogin")
     @ResponseBody
-    public ResponseEntity<Boolean> checkLoginStatus() {
+    public ResponseEntity<Boolean> checkLoginStatus(HttpServletRequest request) {
+        HttpSession session = request.getSession();
         Boolean isLoggedIn = (Boolean) session.getAttribute("inLog");
-
         if (isLoggedIn != null && isLoggedIn) {
             // 로그인 상태이면 true 반환
             return ResponseEntity.ok(true);
