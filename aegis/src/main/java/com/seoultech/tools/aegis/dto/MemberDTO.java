@@ -2,9 +2,6 @@ package com.seoultech.tools.aegis.dto;
 
 import com.seoultech.tools.aegis.entity.MemberEntity;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 @Getter
