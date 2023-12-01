@@ -2,6 +2,10 @@ package com.seoultech.tools.aegis.dto;
 
 import com.seoultech.tools.aegis.entity.MemberEntity;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
@@ -10,8 +14,14 @@ import lombok.*;
 @ToString
 public class MemberDTO {
     private Long id;
+
+    @NotEmpty
     private String memberEmail;
+
+    @NotEmpty
     private String memberPassword;
+
+    @NotEmpty
     private String memberNickname;
 
     public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
