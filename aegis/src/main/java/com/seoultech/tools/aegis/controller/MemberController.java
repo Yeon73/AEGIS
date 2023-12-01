@@ -2,12 +2,12 @@ package com.seoultech.tools.aegis.controller;
 
 import com.seoultech.tools.aegis.dto.MemberDTO;
 import com.seoultech.tools.aegis.service.MemberService;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -20,11 +20,14 @@ import java.io.OutputStream;
 public class MemberController {
 
     private final MemberService memberService;
+    private final HttpSession session;
 
     // 생성자 주입
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, HttpSession session) {
         this.memberService = memberService;
+        this.session = session;
     }
+
 
     @GetMapping("/game")
     public void download(HttpServletResponse response) throws Exception {
@@ -74,7 +77,7 @@ public class MemberController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity<Boolean> login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+    public ResponseEntity<Boolean> login(@ModelAttribute MemberDTO memberDTO) {
         MemberDTO loginResult = memberService.login(memberDTO);
         if (loginResult != null) {
             // login 성공
@@ -121,7 +124,7 @@ public class MemberController {
 
     @GetMapping("/isLogin")
     @ResponseBody
-    public ResponseEntity<Boolean> checkLoginStatus(HttpSession session) {
+    public ResponseEntity<Boolean> checkLoginStatus() {
         Boolean isLoggedIn = (Boolean) session.getAttribute("inLog");
 
         if (isLoggedIn != null && isLoggedIn) {
