@@ -29,7 +29,7 @@ public class MemberController {
     @GetMapping("/game")
     public void download(HttpServletResponse response) throws Exception {
         try{
-           String path = "C:\\";
+           String path = "~/app/AEGIS_.exe";
             File file = new File(path);
             response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로 쓰이는지를 알려주는 헤더
 
