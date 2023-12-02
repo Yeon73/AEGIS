@@ -6,8 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -18,19 +16,16 @@ import java.io.OutputStream;
 @Controller
 @RequestMapping(value = "/member")
 public class MemberController {
-
     private final MemberService memberService;
 
     // 생성자 주입
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
+    public MemberController(MemberService memberService) { this.memberService = memberService; }
 
 
     @GetMapping("/game")
     public void download(HttpServletResponse response) throws Exception {
         try{
-           String path = "~/app/AEGIS_.exe";
+           String path = "/home/ec2-user/app/AEGIS_.exe";
             File file = new File(path);
             response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로 쓰이는지를 알려주는 헤더
 
@@ -75,8 +70,7 @@ public class MemberController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity<Boolean> login(@ModelAttribute MemberDTO memberDTO, HttpServletRequest request) {
-        HttpSession session = request.getSession();
+    public ResponseEntity<Boolean> login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
         MemberDTO loginResult = memberService.login(memberDTO);
         if (loginResult != null) {
             // login 성공
@@ -93,6 +87,7 @@ public class MemberController {
     public String mainForm() {
         return "main";
     }
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
@@ -123,8 +118,7 @@ public class MemberController {
 
     @GetMapping("/isLogin")
     @ResponseBody
-    public ResponseEntity<Boolean> checkLoginStatus(HttpServletRequest request) {
-        HttpSession session = request.getSession();
+    public ResponseEntity<Boolean> checkLoginStatus(HttpSession session) {
         Boolean isLoggedIn = (Boolean) session.getAttribute("inLog");
         if (isLoggedIn != null && isLoggedIn) {
             // 로그인 상태이면 true 반환
